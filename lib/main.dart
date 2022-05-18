@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-//import 'package:http/http.dart';
+import 'package:http/http.dart';
 import 'package:movie_app/src/actions/index1.dart';
 import 'package:movie_app/src/data/auth_api.dart';
 import 'package:movie_app/src/epics/app_user_epic.dart';

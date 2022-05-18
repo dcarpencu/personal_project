@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/src/containers/course_room.dart';
 import 'package:movie_app/src/models/app_course.dart';
 
 class CourseCard extends StatelessWidget {
@@ -16,7 +17,6 @@ class CourseCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         child: InkWell(
-          onTap: () {},
           splashColor: splashColor[course.type],
           child: Row(
             children: <Widget>[
@@ -29,6 +29,12 @@ class CourseCard extends StatelessWidget {
               ),
               IconButton(onPressed: () {}, icon: const Icon(Icons.star))
             ],
+          ),
+          onTap: () => Navigator.push<Widget>(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) => CourseRoom(course: course),
+            ),
           ),
         ),
     );
