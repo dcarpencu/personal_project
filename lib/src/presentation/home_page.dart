@@ -1,5 +1,3 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:movie_app/src/actions/index1.dart';
@@ -15,6 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //final ScrollController _controller = ScrollController();
+  //final DataRepository repository = DataRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -22,39 +21,54 @@ class _HomePageState extends State<HomePage> {
       builder: (BuildContext context, AppState state) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text('A soon to be menu'),
+            backgroundColor: Colors.green,
+            title: const Text('Available courses'),
             leading: IconButton(
-              icon: const Icon(Icons.power_settings_new),
+              icon: const Icon(Icons.logout),
               onPressed: () {
                 StoreProvider.of<AppState>(context).dispatch(const Logout());
               },
             ),
           ),
-          body: Center(
-            child: SizedBox(
-              width: 250,
-              child: DefaultTextStyle(
-                style: const TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.pink,
-                ),
-                child: AnimatedTextKit(
-                  animatedTexts: <FadeAnimatedText>[
-                    FadeAnimatedText(
-                      'Work in progress.',
-                    ),
-                    FadeAnimatedText('pls DND ;('),
-                    FadeAnimatedText('The developers are sleeping...'),
-                  ],
-                  onTap: () {
-                    if (kDebugMode) {
-                      print('Tap Event');
-                    }
-                  },
-                ),
-              ),
+          body: GridView.builder(
+            padding: const EdgeInsets.all(8),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1,
+              childAspectRatio: 5 / 2,
+              crossAxisSpacing: 24,
+              mainAxisSpacing: 8,
             ),
+            itemCount: 10,
+            itemBuilder: (BuildContext context, int index) {
+              return Card(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const ListTile(
+                      leading: Icon(Icons.image),
+                      title: Text('The Enchanted Nightingale'),
+                      subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        ElevatedButton(
+                          child: const Text('Check available tutors'),
+                          onPressed: () {/* ... */},
+                        ),
+                        const SizedBox(width: 8),
+                        TextButton(
+                          //style: ButtonStyle(elevation: 4),
+                          onPressed: () {/* ... */},
+                          child: const Text('Course description'),
+                        ),
+                        const SizedBox(width: 8),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
         );
       },
