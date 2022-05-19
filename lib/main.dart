@@ -32,7 +32,8 @@ Future<void> main() async {
     middleware: <Middleware<AppState>>[
       EpicMiddleware<AppState>(epic.getEpics()),
     ],
-  )..dispatch(const GetCurrentUser());
+  )
+    ..dispatch(const GetCurrentUser());
 
   runApp(TutoringApp(store: store));
 }
