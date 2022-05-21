@@ -18,7 +18,7 @@ class DatePicker extends StatefulWidget {
 }
 
 class _DatePickerState extends State<DatePicker> {
-  final dateController = TextEditingController();
+  final TextEditingController dateController = TextEditingController();
 
   @override
   void initState() {

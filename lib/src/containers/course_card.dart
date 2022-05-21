@@ -8,9 +8,9 @@ class CourseCard extends StatelessWidget {
 
   final Course course;
   final Map<String, Color?> splashColor = <String, Color?>{
-    'cat': Colors.pink[100],
-    'dog': Colors.blue[100],
-    'other': Colors.grey[100]
+    'theoretical': Colors.pink[100],
+    'hands-on': Colors.blue[100],
+    'other': Colors.grey[100],
   };
 
   @override
@@ -24,7 +24,16 @@ class CourseCard extends StatelessWidget {
                 child: Padding(
                   padding:
                   const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  child: Text(course.name),
+                  child: Column(
+                    children: <Widget>[
+                      Text(course.name),
+                      Text(course.type),
+                      Text(course.type),
+                      Text(course.type),
+                      Text(course.type),
+                      Text(course.type),
+                    ],
+                  ),
                 ),
               ),
               IconButton(onPressed: () {}, icon: const Icon(Icons.star))

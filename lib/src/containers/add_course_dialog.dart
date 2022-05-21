@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/src/data/courses_database.dart';
 import 'package:movie_app/src/models/app_course.dart';
+import 'package:movie_app/src/models/available.dart';
 
 
 class AddCourseDialog extends StatefulWidget {
@@ -30,8 +31,8 @@ class _AddCourseDialogState extends State<AddCourseDialog> {
                 onChanged: (String text) => courseName = text,
               ),
               RadioListTile(
-                title: const Text('Cat'),
-                value: 'cat',
+                title: const Text('Theoretical'),
+                value: 'theoretical',
                 groupValue: character,
                 onChanged: (Object? value) {
                   setState(() {
@@ -40,8 +41,8 @@ class _AddCourseDialogState extends State<AddCourseDialog> {
                 },
               ),
               RadioListTile(
-                title: const Text('Dog'),
-                value: 'dog',
+                title: const Text('Hands-on'),
+                value: 'hands-on',
                 groupValue: character,
                 onChanged: (Object? value) {
                   setState(() {
@@ -72,7 +73,7 @@ class _AddCourseDialogState extends State<AddCourseDialog> {
               onPressed: () {
                 if (courseName != null && character.isNotEmpty) {
                   final Course newCourse =
-                  Course(courseName!, type: character, availables: []);
+                  Course(courseName!, type: character, availables: <Available>[]);
                   repository.addPet(newCourse);
                   Navigator.of(context).pop();
                 }

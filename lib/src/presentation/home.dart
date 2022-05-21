@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/src/containers/user_container.dart';
 import 'package:movie_app/src/models/index.dart';
 import 'package:movie_app/src/presentation/home_page.dart';
+import 'package:movie_app/src/presentation/home_page_admin.dart';
 import 'package:movie_app/src/presentation/login_page.dart';
+import 'package:movie_app/src/presentation/role_page.dart';
 
 
 
@@ -16,9 +18,13 @@ class Home extends StatelessWidget {
         if (user != null) {
           return const HomePage();
         } else {
-          return const LoginPage();
+          return const HomePage();
         }
       },
     );
   }
 }
+// if (user != null && 'student' == 'student') {
+// return const HomePage();
+// } else if (user != null && user.role == 'admin') {
+// return const HomePageAdmin();

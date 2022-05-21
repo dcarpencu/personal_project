@@ -21,11 +21,13 @@ class _$LoginTearOff {
   LoginStart start(
       {required String email,
       required String password,
+      String? role,
       required ActionResult onResult,
       String pendingId = _kLoginPendingId}) {
     return LoginStart(
       email: email,
       password: password,
+      role: role,
       onResult: onResult,
       pendingId: pendingId,
     );
@@ -58,7 +60,7 @@ mixin _$Login {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password,
+    required TResult Function(String email, String password, String? role,
             ActionResult onResult, String pendingId)
         start,
     required TResult Function(AppUser user, String pendingId) successful,
@@ -69,8 +71,8 @@ mixin _$Login {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String email, String password, ActionResult onResult,
-            String pendingId)?
+    TResult Function(String email, String password, String? role,
+            ActionResult onResult, String pendingId)?
         start,
     TResult Function(AppUser user, String pendingId)? successful,
     TResult Function(Object error, StackTrace stackTrace, String pendingId)?
@@ -79,8 +81,8 @@ mixin _$Login {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password, ActionResult onResult,
-            String pendingId)?
+    TResult Function(String email, String password, String? role,
+            ActionResult onResult, String pendingId)?
         start,
     TResult Function(AppUser user, String pendingId)? successful,
     TResult Function(Object error, StackTrace stackTrace, String pendingId)?
@@ -150,7 +152,11 @@ abstract class $LoginStartCopyWith<$Res> implements $LoginCopyWith<$Res> {
       _$LoginStartCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String email, String password, ActionResult onResult, String pendingId});
+      {String email,
+      String password,
+      String? role,
+      ActionResult onResult,
+      String pendingId});
 }
 
 /// @nodoc
@@ -166,6 +172,7 @@ class _$LoginStartCopyWithImpl<$Res> extends _$LoginCopyWithImpl<$Res>
   $Res call({
     Object? email = freezed,
     Object? password = freezed,
+    Object? role = freezed,
     Object? onResult = freezed,
     Object? pendingId = freezed,
   }) {
@@ -178,6 +185,10 @@ class _$LoginStartCopyWithImpl<$Res> extends _$LoginCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      role: role == freezed
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String?,
       onResult: onResult == freezed
           ? _value.onResult
           : onResult // ignore: cast_nullable_to_non_nullable
@@ -197,6 +208,7 @@ class _$LoginStart implements LoginStart {
   const _$LoginStart(
       {required this.email,
       required this.password,
+      this.role,
       required this.onResult,
       this.pendingId = _kLoginPendingId});
 
@@ -205,6 +217,8 @@ class _$LoginStart implements LoginStart {
   @override
   final String password;
   @override
+  final String? role;
+  @override
   final ActionResult onResult;
   @JsonKey()
   @override
@@ -212,7 +226,7 @@ class _$LoginStart implements LoginStart {
 
   @override
   String toString() {
-    return 'Login.start(email: $email, password: $password, onResult: $onResult, pendingId: $pendingId)';
+    return 'Login.start(email: $email, password: $password, role: $role, onResult: $onResult, pendingId: $pendingId)';
   }
 
   @override
@@ -222,6 +236,7 @@ class _$LoginStart implements LoginStart {
             other is LoginStart &&
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.password, password) &&
+            const DeepCollectionEquality().equals(other.role, role) &&
             (identical(other.onResult, onResult) ||
                 other.onResult == onResult) &&
             const DeepCollectionEquality().equals(other.pendingId, pendingId));
@@ -232,6 +247,7 @@ class _$LoginStart implements LoginStart {
       runtimeType,
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(password),
+      const DeepCollectionEquality().hash(role),
       onResult,
       const DeepCollectionEquality().hash(pendingId));
 
@@ -243,7 +259,7 @@ class _$LoginStart implements LoginStart {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password,
+    required TResult Function(String email, String password, String? role,
             ActionResult onResult, String pendingId)
         start,
     required TResult Function(AppUser user, String pendingId) successful,
@@ -251,27 +267,27 @@ class _$LoginStart implements LoginStart {
             Object error, StackTrace stackTrace, String pendingId)
         error,
   }) {
-    return start(email, password, onResult, pendingId);
+    return start(email, password, role, onResult, pendingId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String email, String password, ActionResult onResult,
-            String pendingId)?
+    TResult Function(String email, String password, String? role,
+            ActionResult onResult, String pendingId)?
         start,
     TResult Function(AppUser user, String pendingId)? successful,
     TResult Function(Object error, StackTrace stackTrace, String pendingId)?
         error,
   }) {
-    return start?.call(email, password, onResult, pendingId);
+    return start?.call(email, password, role, onResult, pendingId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password, ActionResult onResult,
-            String pendingId)?
+    TResult Function(String email, String password, String? role,
+            ActionResult onResult, String pendingId)?
         start,
     TResult Function(AppUser user, String pendingId)? successful,
     TResult Function(Object error, StackTrace stackTrace, String pendingId)?
@@ -279,7 +295,7 @@ class _$LoginStart implements LoginStart {
     required TResult orElse(),
   }) {
     if (start != null) {
-      return start(email, password, onResult, pendingId);
+      return start(email, password, role, onResult, pendingId);
     }
     return orElse();
   }
@@ -323,11 +339,13 @@ abstract class LoginStart implements Login, ActionStart {
   const factory LoginStart(
       {required String email,
       required String password,
+      String? role,
       required ActionResult onResult,
       String pendingId}) = _$LoginStart;
 
   String get email;
   String get password;
+  String? get role;
   ActionResult get onResult;
   @override
   String get pendingId;
@@ -424,7 +442,7 @@ class _$LoginSuccessful implements LoginSuccessful {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password,
+    required TResult Function(String email, String password, String? role,
             ActionResult onResult, String pendingId)
         start,
     required TResult Function(AppUser user, String pendingId) successful,
@@ -438,8 +456,8 @@ class _$LoginSuccessful implements LoginSuccessful {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String email, String password, ActionResult onResult,
-            String pendingId)?
+    TResult Function(String email, String password, String? role,
+            ActionResult onResult, String pendingId)?
         start,
     TResult Function(AppUser user, String pendingId)? successful,
     TResult Function(Object error, StackTrace stackTrace, String pendingId)?
@@ -451,8 +469,8 @@ class _$LoginSuccessful implements LoginSuccessful {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password, ActionResult onResult,
-            String pendingId)?
+    TResult Function(String email, String password, String? role,
+            ActionResult onResult, String pendingId)?
         start,
     TResult Function(AppUser user, String pendingId)? successful,
     TResult Function(Object error, StackTrace stackTrace, String pendingId)?
@@ -601,7 +619,7 @@ class _$LoginError implements LoginError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password,
+    required TResult Function(String email, String password, String? role,
             ActionResult onResult, String pendingId)
         start,
     required TResult Function(AppUser user, String pendingId) successful,
@@ -615,8 +633,8 @@ class _$LoginError implements LoginError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String email, String password, ActionResult onResult,
-            String pendingId)?
+    TResult Function(String email, String password, String? role,
+            ActionResult onResult, String pendingId)?
         start,
     TResult Function(AppUser user, String pendingId)? successful,
     TResult Function(Object error, StackTrace stackTrace, String pendingId)?
@@ -628,8 +646,8 @@ class _$LoginError implements LoginError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password, ActionResult onResult,
-            String pendingId)?
+    TResult Function(String email, String password, String? role,
+            ActionResult onResult, String pendingId)?
         start,
     TResult Function(AppUser user, String pendingId)? successful,
     TResult Function(Object error, StackTrace stackTrace, String pendingId)?
@@ -1210,12 +1228,14 @@ class _$CreateUserTearOff {
       {required String email,
       required String password,
       required String username,
-      required ActionResult onResult}) {
+      required ActionResult onResult,
+      String? role}) {
     return CreateUserStart(
       email: email,
       password: password,
       username: username,
       onResult: onResult,
+      role: role,
     );
   }
 
@@ -1241,7 +1261,7 @@ mixin _$CreateUser {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)
+            ActionResult onResult, String? role)
         $default, {
     required TResult Function(AppUser user) successful,
     required TResult Function(Object error, StackTrace stackTrace) error,
@@ -1250,7 +1270,7 @@ mixin _$CreateUser {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)?
+            ActionResult onResult, String? role)?
         $default, {
     TResult Function(AppUser user)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
@@ -1259,7 +1279,7 @@ mixin _$CreateUser {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)?
+            ActionResult onResult, String? role)?
         $default, {
     TResult Function(AppUser user)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
@@ -1312,7 +1332,11 @@ abstract class $CreateUserStartCopyWith<$Res> {
           CreateUserStart value, $Res Function(CreateUserStart) then) =
       _$CreateUserStartCopyWithImpl<$Res>;
   $Res call(
-      {String email, String password, String username, ActionResult onResult});
+      {String email,
+      String password,
+      String username,
+      ActionResult onResult,
+      String? role});
 }
 
 /// @nodoc
@@ -1331,6 +1355,7 @@ class _$CreateUserStartCopyWithImpl<$Res> extends _$CreateUserCopyWithImpl<$Res>
     Object? password = freezed,
     Object? username = freezed,
     Object? onResult = freezed,
+    Object? role = freezed,
   }) {
     return _then(CreateUserStart(
       email: email == freezed
@@ -1349,6 +1374,10 @@ class _$CreateUserStartCopyWithImpl<$Res> extends _$CreateUserCopyWithImpl<$Res>
           ? _value.onResult
           : onResult // ignore: cast_nullable_to_non_nullable
               as ActionResult,
+      role: role == freezed
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -1360,7 +1389,8 @@ class _$CreateUserStart implements CreateUserStart {
       {required this.email,
       required this.password,
       required this.username,
-      required this.onResult});
+      required this.onResult,
+      this.role});
 
   @override
   final String email;
@@ -1370,10 +1400,12 @@ class _$CreateUserStart implements CreateUserStart {
   final String username;
   @override
   final ActionResult onResult;
+  @override
+  final String? role;
 
   @override
   String toString() {
-    return 'CreateUser(email: $email, password: $password, username: $username, onResult: $onResult)';
+    return 'CreateUser(email: $email, password: $password, username: $username, onResult: $onResult, role: $role)';
   }
 
   @override
@@ -1385,7 +1417,8 @@ class _$CreateUserStart implements CreateUserStart {
             const DeepCollectionEquality().equals(other.password, password) &&
             const DeepCollectionEquality().equals(other.username, username) &&
             (identical(other.onResult, onResult) ||
-                other.onResult == onResult));
+                other.onResult == onResult) &&
+            const DeepCollectionEquality().equals(other.role, role));
   }
 
   @override
@@ -1394,7 +1427,8 @@ class _$CreateUserStart implements CreateUserStart {
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(password),
       const DeepCollectionEquality().hash(username),
-      onResult);
+      onResult,
+      const DeepCollectionEquality().hash(role));
 
   @JsonKey(ignore: true)
   @override
@@ -1405,38 +1439,38 @@ class _$CreateUserStart implements CreateUserStart {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)
+            ActionResult onResult, String? role)
         $default, {
     required TResult Function(AppUser user) successful,
     required TResult Function(Object error, StackTrace stackTrace) error,
   }) {
-    return $default(email, password, username, onResult);
+    return $default(email, password, username, onResult, role);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)?
+            ActionResult onResult, String? role)?
         $default, {
     TResult Function(AppUser user)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
   }) {
-    return $default?.call(email, password, username, onResult);
+    return $default?.call(email, password, username, onResult, role);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)?
+            ActionResult onResult, String? role)?
         $default, {
     TResult Function(AppUser user)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
     required TResult orElse(),
   }) {
     if ($default != null) {
-      return $default(email, password, username, onResult);
+      return $default(email, password, username, onResult, role);
     }
     return orElse();
   }
@@ -1481,12 +1515,14 @@ abstract class CreateUserStart implements CreateUser {
       {required String email,
       required String password,
       required String username,
-      required ActionResult onResult}) = _$CreateUserStart;
+      required ActionResult onResult,
+      String? role}) = _$CreateUserStart;
 
   String get email;
   String get password;
   String get username;
   ActionResult get onResult;
+  String? get role;
   @JsonKey(ignore: true)
   $CreateUserStartCopyWith<CreateUserStart> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1568,7 +1604,7 @@ class _$CreateUserSuccessful implements CreateUserSuccessful {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)
+            ActionResult onResult, String? role)
         $default, {
     required TResult Function(AppUser user) successful,
     required TResult Function(Object error, StackTrace stackTrace) error,
@@ -1580,7 +1616,7 @@ class _$CreateUserSuccessful implements CreateUserSuccessful {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)?
+            ActionResult onResult, String? role)?
         $default, {
     TResult Function(AppUser user)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
@@ -1592,7 +1628,7 @@ class _$CreateUserSuccessful implements CreateUserSuccessful {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)?
+            ActionResult onResult, String? role)?
         $default, {
     TResult Function(AppUser user)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
@@ -1725,7 +1761,7 @@ class _$CreateUserError implements CreateUserError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)
+            ActionResult onResult, String? role)
         $default, {
     required TResult Function(AppUser user) successful,
     required TResult Function(Object error, StackTrace stackTrace) error,
@@ -1737,7 +1773,7 @@ class _$CreateUserError implements CreateUserError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)?
+            ActionResult onResult, String? role)?
         $default, {
     TResult Function(AppUser user)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
@@ -1749,7 +1785,7 @@ class _$CreateUserError implements CreateUserError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)?
+            ActionResult onResult, String? role)?
         $default, {
     TResult Function(AppUser user)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
@@ -3335,12 +3371,14 @@ class _$CreateTutorTearOff {
       {required String email,
       required String password,
       required String username,
-      required ActionResult onResult}) {
+      required ActionResult onResult,
+      String? role}) {
     return CreateTutorStart(
       email: email,
       password: password,
       username: username,
       onResult: onResult,
+      role: role,
     );
   }
 
@@ -3366,7 +3404,7 @@ mixin _$CreateTutor {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)
+            ActionResult onResult, String? role)
         $default, {
     required TResult Function(AppUser user) successful,
     required TResult Function(Object error, StackTrace stackTrace) error,
@@ -3375,7 +3413,7 @@ mixin _$CreateTutor {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)?
+            ActionResult onResult, String? role)?
         $default, {
     TResult Function(AppUser user)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
@@ -3384,7 +3422,7 @@ mixin _$CreateTutor {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)?
+            ActionResult onResult, String? role)?
         $default, {
     TResult Function(AppUser user)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
@@ -3437,7 +3475,11 @@ abstract class $CreateTutorStartCopyWith<$Res> {
           CreateTutorStart value, $Res Function(CreateTutorStart) then) =
       _$CreateTutorStartCopyWithImpl<$Res>;
   $Res call(
-      {String email, String password, String username, ActionResult onResult});
+      {String email,
+      String password,
+      String username,
+      ActionResult onResult,
+      String? role});
 }
 
 /// @nodoc
@@ -3457,6 +3499,7 @@ class _$CreateTutorStartCopyWithImpl<$Res>
     Object? password = freezed,
     Object? username = freezed,
     Object? onResult = freezed,
+    Object? role = freezed,
   }) {
     return _then(CreateTutorStart(
       email: email == freezed
@@ -3475,6 +3518,10 @@ class _$CreateTutorStartCopyWithImpl<$Res>
           ? _value.onResult
           : onResult // ignore: cast_nullable_to_non_nullable
               as ActionResult,
+      role: role == freezed
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -3486,7 +3533,8 @@ class _$CreateTutorStart implements CreateTutorStart {
       {required this.email,
       required this.password,
       required this.username,
-      required this.onResult});
+      required this.onResult,
+      this.role});
 
   @override
   final String email;
@@ -3496,10 +3544,12 @@ class _$CreateTutorStart implements CreateTutorStart {
   final String username;
   @override
   final ActionResult onResult;
+  @override
+  final String? role;
 
   @override
   String toString() {
-    return 'CreateTutor(email: $email, password: $password, username: $username, onResult: $onResult)';
+    return 'CreateTutor(email: $email, password: $password, username: $username, onResult: $onResult, role: $role)';
   }
 
   @override
@@ -3511,7 +3561,8 @@ class _$CreateTutorStart implements CreateTutorStart {
             const DeepCollectionEquality().equals(other.password, password) &&
             const DeepCollectionEquality().equals(other.username, username) &&
             (identical(other.onResult, onResult) ||
-                other.onResult == onResult));
+                other.onResult == onResult) &&
+            const DeepCollectionEquality().equals(other.role, role));
   }
 
   @override
@@ -3520,7 +3571,8 @@ class _$CreateTutorStart implements CreateTutorStart {
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(password),
       const DeepCollectionEquality().hash(username),
-      onResult);
+      onResult,
+      const DeepCollectionEquality().hash(role));
 
   @JsonKey(ignore: true)
   @override
@@ -3531,38 +3583,38 @@ class _$CreateTutorStart implements CreateTutorStart {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)
+            ActionResult onResult, String? role)
         $default, {
     required TResult Function(AppUser user) successful,
     required TResult Function(Object error, StackTrace stackTrace) error,
   }) {
-    return $default(email, password, username, onResult);
+    return $default(email, password, username, onResult, role);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)?
+            ActionResult onResult, String? role)?
         $default, {
     TResult Function(AppUser user)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
   }) {
-    return $default?.call(email, password, username, onResult);
+    return $default?.call(email, password, username, onResult, role);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)?
+            ActionResult onResult, String? role)?
         $default, {
     TResult Function(AppUser user)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
     required TResult orElse(),
   }) {
     if ($default != null) {
-      return $default(email, password, username, onResult);
+      return $default(email, password, username, onResult, role);
     }
     return orElse();
   }
@@ -3607,12 +3659,14 @@ abstract class CreateTutorStart implements CreateTutor {
       {required String email,
       required String password,
       required String username,
-      required ActionResult onResult}) = _$CreateTutorStart;
+      required ActionResult onResult,
+      String? role}) = _$CreateTutorStart;
 
   String get email;
   String get password;
   String get username;
   ActionResult get onResult;
+  String? get role;
   @JsonKey(ignore: true)
   $CreateTutorStartCopyWith<CreateTutorStart> get copyWith =>
       throw _privateConstructorUsedError;
@@ -3694,7 +3748,7 @@ class _$CreateTutorSuccessful implements CreateTutorSuccessful {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)
+            ActionResult onResult, String? role)
         $default, {
     required TResult Function(AppUser user) successful,
     required TResult Function(Object error, StackTrace stackTrace) error,
@@ -3706,7 +3760,7 @@ class _$CreateTutorSuccessful implements CreateTutorSuccessful {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)?
+            ActionResult onResult, String? role)?
         $default, {
     TResult Function(AppUser user)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
@@ -3718,7 +3772,7 @@ class _$CreateTutorSuccessful implements CreateTutorSuccessful {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)?
+            ActionResult onResult, String? role)?
         $default, {
     TResult Function(AppUser user)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
@@ -3852,7 +3906,7 @@ class _$CreateTutorError implements CreateTutorError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)
+            ActionResult onResult, String? role)
         $default, {
     required TResult Function(AppUser user) successful,
     required TResult Function(Object error, StackTrace stackTrace) error,
@@ -3864,7 +3918,7 @@ class _$CreateTutorError implements CreateTutorError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)?
+            ActionResult onResult, String? role)?
         $default, {
     TResult Function(AppUser user)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
@@ -3876,7 +3930,7 @@ class _$CreateTutorError implements CreateTutorError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(String email, String password, String username,
-            ActionResult onResult)?
+            ActionResult onResult, String? role)?
         $default, {
     TResult Function(AppUser user)? successful,
     TResult Function(Object error, StackTrace stackTrace)? error,
@@ -3941,11 +3995,13 @@ class _$LoginTutorTearOff {
   LoginTutorStart start(
       {required String email,
       required String password,
+      String? role,
       required ActionResult onResult,
       String pendingId = _kLoginTutorPendingId}) {
     return LoginTutorStart(
       email: email,
       password: password,
+      role: role,
       onResult: onResult,
       pendingId: pendingId,
     );
@@ -3978,7 +4034,7 @@ mixin _$LoginTutor {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password,
+    required TResult Function(String email, String password, String? role,
             ActionResult onResult, String pendingId)
         start,
     required TResult Function(AppUser user, String pendingId) successful,
@@ -3989,8 +4045,8 @@ mixin _$LoginTutor {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String email, String password, ActionResult onResult,
-            String pendingId)?
+    TResult Function(String email, String password, String? role,
+            ActionResult onResult, String pendingId)?
         start,
     TResult Function(AppUser user, String pendingId)? successful,
     TResult Function(Object error, StackTrace stackTrace, String pendingId)?
@@ -3999,8 +4055,8 @@ mixin _$LoginTutor {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password, ActionResult onResult,
-            String pendingId)?
+    TResult Function(String email, String password, String? role,
+            ActionResult onResult, String pendingId)?
         start,
     TResult Function(AppUser user, String pendingId)? successful,
     TResult Function(Object error, StackTrace stackTrace, String pendingId)?
@@ -4073,7 +4129,11 @@ abstract class $LoginTutorStartCopyWith<$Res>
       _$LoginTutorStartCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String email, String password, ActionResult onResult, String pendingId});
+      {String email,
+      String password,
+      String? role,
+      ActionResult onResult,
+      String pendingId});
 }
 
 /// @nodoc
@@ -4090,6 +4150,7 @@ class _$LoginTutorStartCopyWithImpl<$Res> extends _$LoginTutorCopyWithImpl<$Res>
   $Res call({
     Object? email = freezed,
     Object? password = freezed,
+    Object? role = freezed,
     Object? onResult = freezed,
     Object? pendingId = freezed,
   }) {
@@ -4102,6 +4163,10 @@ class _$LoginTutorStartCopyWithImpl<$Res> extends _$LoginTutorCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      role: role == freezed
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String?,
       onResult: onResult == freezed
           ? _value.onResult
           : onResult // ignore: cast_nullable_to_non_nullable
@@ -4121,6 +4186,7 @@ class _$LoginTutorStart implements LoginTutorStart {
   const _$LoginTutorStart(
       {required this.email,
       required this.password,
+      this.role,
       required this.onResult,
       this.pendingId = _kLoginTutorPendingId});
 
@@ -4129,6 +4195,8 @@ class _$LoginTutorStart implements LoginTutorStart {
   @override
   final String password;
   @override
+  final String? role;
+  @override
   final ActionResult onResult;
   @JsonKey()
   @override
@@ -4136,7 +4204,7 @@ class _$LoginTutorStart implements LoginTutorStart {
 
   @override
   String toString() {
-    return 'LoginTutor.start(email: $email, password: $password, onResult: $onResult, pendingId: $pendingId)';
+    return 'LoginTutor.start(email: $email, password: $password, role: $role, onResult: $onResult, pendingId: $pendingId)';
   }
 
   @override
@@ -4146,6 +4214,7 @@ class _$LoginTutorStart implements LoginTutorStart {
             other is LoginTutorStart &&
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.password, password) &&
+            const DeepCollectionEquality().equals(other.role, role) &&
             (identical(other.onResult, onResult) ||
                 other.onResult == onResult) &&
             const DeepCollectionEquality().equals(other.pendingId, pendingId));
@@ -4156,6 +4225,7 @@ class _$LoginTutorStart implements LoginTutorStart {
       runtimeType,
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(password),
+      const DeepCollectionEquality().hash(role),
       onResult,
       const DeepCollectionEquality().hash(pendingId));
 
@@ -4167,7 +4237,7 @@ class _$LoginTutorStart implements LoginTutorStart {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password,
+    required TResult Function(String email, String password, String? role,
             ActionResult onResult, String pendingId)
         start,
     required TResult Function(AppUser user, String pendingId) successful,
@@ -4175,27 +4245,27 @@ class _$LoginTutorStart implements LoginTutorStart {
             Object error, StackTrace stackTrace, String pendingId)
         error,
   }) {
-    return start(email, password, onResult, pendingId);
+    return start(email, password, role, onResult, pendingId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String email, String password, ActionResult onResult,
-            String pendingId)?
+    TResult Function(String email, String password, String? role,
+            ActionResult onResult, String pendingId)?
         start,
     TResult Function(AppUser user, String pendingId)? successful,
     TResult Function(Object error, StackTrace stackTrace, String pendingId)?
         error,
   }) {
-    return start?.call(email, password, onResult, pendingId);
+    return start?.call(email, password, role, onResult, pendingId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password, ActionResult onResult,
-            String pendingId)?
+    TResult Function(String email, String password, String? role,
+            ActionResult onResult, String pendingId)?
         start,
     TResult Function(AppUser user, String pendingId)? successful,
     TResult Function(Object error, StackTrace stackTrace, String pendingId)?
@@ -4203,7 +4273,7 @@ class _$LoginTutorStart implements LoginTutorStart {
     required TResult orElse(),
   }) {
     if (start != null) {
-      return start(email, password, onResult, pendingId);
+      return start(email, password, role, onResult, pendingId);
     }
     return orElse();
   }
@@ -4247,11 +4317,13 @@ abstract class LoginTutorStart implements LoginTutor, ActionStart {
   const factory LoginTutorStart(
       {required String email,
       required String password,
+      String? role,
       required ActionResult onResult,
       String pendingId}) = _$LoginTutorStart;
 
   String get email;
   String get password;
+  String? get role;
   ActionResult get onResult;
   @override
   String get pendingId;
@@ -4351,7 +4423,7 @@ class _$LoginTutorSuccessful implements LoginTutorSuccessful {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password,
+    required TResult Function(String email, String password, String? role,
             ActionResult onResult, String pendingId)
         start,
     required TResult Function(AppUser user, String pendingId) successful,
@@ -4365,8 +4437,8 @@ class _$LoginTutorSuccessful implements LoginTutorSuccessful {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String email, String password, ActionResult onResult,
-            String pendingId)?
+    TResult Function(String email, String password, String? role,
+            ActionResult onResult, String pendingId)?
         start,
     TResult Function(AppUser user, String pendingId)? successful,
     TResult Function(Object error, StackTrace stackTrace, String pendingId)?
@@ -4378,8 +4450,8 @@ class _$LoginTutorSuccessful implements LoginTutorSuccessful {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password, ActionResult onResult,
-            String pendingId)?
+    TResult Function(String email, String password, String? role,
+            ActionResult onResult, String pendingId)?
         start,
     TResult Function(AppUser user, String pendingId)? successful,
     TResult Function(Object error, StackTrace stackTrace, String pendingId)?
@@ -4530,7 +4602,7 @@ class _$LoginTutorError implements LoginTutorError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password,
+    required TResult Function(String email, String password, String? role,
             ActionResult onResult, String pendingId)
         start,
     required TResult Function(AppUser user, String pendingId) successful,
@@ -4544,8 +4616,8 @@ class _$LoginTutorError implements LoginTutorError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String email, String password, ActionResult onResult,
-            String pendingId)?
+    TResult Function(String email, String password, String? role,
+            ActionResult onResult, String pendingId)?
         start,
     TResult Function(AppUser user, String pendingId)? successful,
     TResult Function(Object error, StackTrace stackTrace, String pendingId)?
@@ -4557,8 +4629,8 @@ class _$LoginTutorError implements LoginTutorError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password, ActionResult onResult,
-            String pendingId)?
+    TResult Function(String email, String password, String? role,
+            ActionResult onResult, String pendingId)?
         start,
     TResult Function(AppUser user, String pendingId)? successful,
     TResult Function(Object error, StackTrace stackTrace, String pendingId)?

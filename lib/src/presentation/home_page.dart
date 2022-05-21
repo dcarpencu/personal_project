@@ -1,7 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:movie_app/src/actions/index1.dart';
+import 'package:movie_app/src/containers/course_card.dart';
+import 'package:movie_app/src/containers/course_card_user.dart';
 import 'package:movie_app/src/containers/home_page_container.dart';
+import 'package:movie_app/src/data/courses_database.dart';
+import 'package:movie_app/src/models/app_course.dart';
 import 'package:movie_app/src/models/index.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,6 +19,20 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   //final ScrollController _controller = ScrollController();
   //final DataRepository repository = DataRepository();
+  final CoursesDatabase repository = CoursesDatabase();
+
+  Widget _buildList(BuildContext context, List<DocumentSnapshot<Map<String, dynamic>>> snapshot) {
+    return ListView(
+      padding: const EdgeInsets.only(top: 20),
+      children: snapshot.map((DocumentSnapshot<Map<String, dynamic>> data) => _buildListItem(context, data)).toList(),
+    );
+  }
+// 3
+  Widget _buildListItem(BuildContext context, DocumentSnapshot<Map<String, dynamic>> snapshot) {
+    final Course course = Course.fromSnapshot(snapshot);
+
+    return CourseCardUser(course: course);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +40,7 @@ class _HomePageState extends State<HomePage> {
       builder: (BuildContext context, AppState state) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.purpleAccent,
             title: const Text('Available courses'),
             leading: IconButton(
               icon: const Icon(Icons.logout),
@@ -30,46 +49,14 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           ),
-          body: GridView.builder(
-            padding: const EdgeInsets.all(8),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 1,
-              childAspectRatio: 5 / 2,
-              crossAxisSpacing: 24,
-              mainAxisSpacing: 8,
-            ),
-            itemCount: 10,
-            itemBuilder: (BuildContext context, int index) {
-              return Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    const ListTile(
-                      leading: Icon(Icons.image),
-                      title: Text('The Enchanted Nightingale'),
-                      subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        ElevatedButton(
-                          child: const Text('Check available tutors'),
-                          onPressed: () {/* ... */},
-                        ),
-                        const SizedBox(width: 8),
-                        TextButton(
-                          //style: ButtonStyle(elevation: 4),
-                          onPressed: () {/* ... */},
-                          child: const Text('Course description'),
-                        ),
-                        const SizedBox(width: 8),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
+          body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+            stream: repository.getStream(),
+            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+              if (!snapshot.hasData) {
+                return const LinearProgressIndicator();
+              }
+              return _buildList(context, snapshot.data?.docs ?? []);
+            },),
         );
       },
     );

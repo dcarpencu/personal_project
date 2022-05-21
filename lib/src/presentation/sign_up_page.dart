@@ -27,6 +27,7 @@ class _SignUpPageState extends State<SignUpPage> {
         email: _email.text,
         password: _password.text,
         username: _username.text,
+        role: 'student',
         onResult: _onResult,
       ),
     );

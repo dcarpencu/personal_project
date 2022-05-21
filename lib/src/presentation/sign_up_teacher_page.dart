@@ -27,6 +27,7 @@ class _SignUpTeacherPageState extends State<SignUpTeacherPage> {
         email: _email.text,
         password: _password.text,
         username: _username.text,
+        role: 'admin',
         onResult: _onResult,
       ),
     );

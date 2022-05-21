@@ -9,16 +9,16 @@ import 'package:movie_app/src/models/available.dart';
 import 'package:movie_app/src/widgets/choose_chips.dart';
 import 'package:movie_app/src/widgets/text_field.dart';
 
-class CourseDetail extends StatefulWidget {
-  const CourseDetail({Key? key, required this.course}) : super(key: key);
+class CourseDetailUser extends StatefulWidget {
+  const CourseDetailUser({Key? key, required this.course}) : super(key: key);
 
   final Course course;
 
   @override
-  _CourseDetailState createState() => _CourseDetailState();
+  _CourseDetailUserState createState() => _CourseDetailUserState();
 }
 
-class _CourseDetailState extends State<CourseDetail> {
+class _CourseDetailUserState extends State<CourseDetailUser> {
   final CoursesDatabase repository = CoursesDatabase();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
@@ -32,8 +32,8 @@ class _CourseDetailState extends State<CourseDetail> {
     type = widget.course.type;
     name = widget.course.name;
     courseTypes = [
-      CategoryOption(type: 'theoretical', name: 'Theoretical', isSelected: type == 'cat'),
-      CategoryOption(type: 'hands-on', name: 'Hands-on', isSelected: type == 'dog'),
+      CategoryOption(type: 'theoretical', name: 'Theoretical', isSelected: type == 'theoretical'),
+      CategoryOption(type: 'hands-on', name: 'Hands-on', isSelected: type == 'hands-on'),
       CategoryOption(type: 'other', name: 'Other', isSelected: type == 'other'),
     ];
     super.initState();
@@ -50,30 +50,6 @@ class _CourseDetailState extends State<CourseDetail> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              const SizedBox(height: 20),
-              UserTextField(
-                name: 'Course Name',
-                initialValue: widget.course.name,
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please input name';
-                  }
-                },
-                inputType: TextInputType.name,
-                onChanged: (String? value) => name = value ?? name,
-              ),
-              ChooseType(
-                title: 'Course Type',
-                options: courseTypes,
-                onOptionTap: (CategoryOption value) {
-                  setState(() {
-                    for (final CategoryOption element in courseTypes) {
-                      type = value.type;
-                      element.isSelected = element.type == value.type;
-                    }
-                  });
-                },
-              ),
               const SizedBox(height: 20),
               UserTextField(
                 name: 'notes',
@@ -156,6 +132,6 @@ class _CourseDetailState extends State<CourseDetail> {
         context: context,
         builder: (BuildContext context) {
           return AddAvailable(course: course, callback: callback);
-        },);
+        });
   }
 }

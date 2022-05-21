@@ -23,11 +23,15 @@ class _$AppUserTearOff {
   const _$AppUserTearOff();
 
   AppUser$ call(
-      {required String uid, required String email, required String username}) {
+      {required String uid,
+      required String email,
+      required String username,
+      String? role}) {
     return AppUser$(
       uid: uid,
       email: email,
       username: username,
+      role: role,
     );
   }
 
@@ -44,6 +48,7 @@ mixin _$AppUser {
   String get uid => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
+  String? get role => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,7 +59,7 @@ mixin _$AppUser {
 abstract class $AppUserCopyWith<$Res> {
   factory $AppUserCopyWith(AppUser value, $Res Function(AppUser) then) =
       _$AppUserCopyWithImpl<$Res>;
-  $Res call({String uid, String email, String username});
+  $Res call({String uid, String email, String username, String? role});
 }
 
 /// @nodoc
@@ -70,6 +75,7 @@ class _$AppUserCopyWithImpl<$Res> implements $AppUserCopyWith<$Res> {
     Object? uid = freezed,
     Object? email = freezed,
     Object? username = freezed,
+    Object? role = freezed,
   }) {
     return _then(_value.copyWith(
       uid: uid == freezed
@@ -84,6 +90,10 @@ class _$AppUserCopyWithImpl<$Res> implements $AppUserCopyWith<$Res> {
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      role: role == freezed
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -93,7 +103,7 @@ abstract class $AppUser$CopyWith<$Res> implements $AppUserCopyWith<$Res> {
   factory $AppUser$CopyWith(AppUser$ value, $Res Function(AppUser$) then) =
       _$AppUser$CopyWithImpl<$Res>;
   @override
-  $Res call({String uid, String email, String username});
+  $Res call({String uid, String email, String username, String? role});
 }
 
 /// @nodoc
@@ -110,6 +120,7 @@ class _$AppUser$CopyWithImpl<$Res> extends _$AppUserCopyWithImpl<$Res>
     Object? uid = freezed,
     Object? email = freezed,
     Object? username = freezed,
+    Object? role = freezed,
   }) {
     return _then(AppUser$(
       uid: uid == freezed
@@ -124,6 +135,10 @@ class _$AppUser$CopyWithImpl<$Res> extends _$AppUserCopyWithImpl<$Res>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      role: role == freezed
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -132,7 +147,10 @@ class _$AppUser$CopyWithImpl<$Res> extends _$AppUserCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AppUser$ implements AppUser$ {
   const _$AppUser$(
-      {required this.uid, required this.email, required this.username});
+      {required this.uid,
+      required this.email,
+      required this.username,
+      this.role});
 
   factory _$AppUser$.fromJson(Map<String, dynamic> json) =>
       _$$AppUser$FromJson(json);
@@ -143,10 +161,12 @@ class _$AppUser$ implements AppUser$ {
   final String email;
   @override
   final String username;
+  @override
+  final String? role;
 
   @override
   String toString() {
-    return 'AppUser(uid: $uid, email: $email, username: $username)';
+    return 'AppUser(uid: $uid, email: $email, username: $username, role: $role)';
   }
 
   @override
@@ -156,7 +176,8 @@ class _$AppUser$ implements AppUser$ {
             other is AppUser$ &&
             const DeepCollectionEquality().equals(other.uid, uid) &&
             const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.username, username));
+            const DeepCollectionEquality().equals(other.username, username) &&
+            const DeepCollectionEquality().equals(other.role, role));
   }
 
   @override
@@ -164,7 +185,8 @@ class _$AppUser$ implements AppUser$ {
       runtimeType,
       const DeepCollectionEquality().hash(uid),
       const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(username));
+      const DeepCollectionEquality().hash(username),
+      const DeepCollectionEquality().hash(role));
 
   @JsonKey(ignore: true)
   @override
@@ -181,7 +203,8 @@ abstract class AppUser$ implements AppUser {
   const factory AppUser$(
       {required String uid,
       required String email,
-      required String username}) = _$AppUser$;
+      required String username,
+      String? role}) = _$AppUser$;
 
   factory AppUser$.fromJson(Map<String, dynamic> json) = _$AppUser$.fromJson;
 
@@ -191,6 +214,8 @@ abstract class AppUser$ implements AppUser {
   String get email;
   @override
   String get username;
+  @override
+  String? get role;
   @override
   @JsonKey(ignore: true)
   $AppUser$CopyWith<AppUser$> get copyWith =>
@@ -226,8 +251,7 @@ const $AppState = _$AppStateTearOff();
 
 /// @nodoc
 mixin _$AppState {
-  AppUser? get user =>
-      throw _privateConstructorUsedError; //AppTeacher? teacher,
+  AppUser? get user => throw _privateConstructorUsedError;
   Set<String> get pending => throw _privateConstructorUsedError;
   Map<String, AppUser> get users => throw _privateConstructorUsedError;
 
@@ -345,7 +369,7 @@ class _$AppState$ implements AppState$ {
   @override
   final AppUser? user;
   @JsonKey()
-  @override //AppTeacher? teacher,
+  @override
   final Set<String> pending;
   @JsonKey()
   @override
@@ -394,7 +418,7 @@ abstract class AppState$ implements AppState {
 
   @override
   AppUser? get user;
-  @override //AppTeacher? teacher,
+  @override
   Set<String> get pending;
   @override
   Map<String, AppUser> get users;

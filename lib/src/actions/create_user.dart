@@ -7,6 +7,7 @@ class CreateUser with _$CreateUser implements AppAction {
     required String password,
     required String username,
     required ActionResult onResult,
+    String? role,
   }) = CreateUserStart;
 
   const factory CreateUser.successful(AppUser user) = CreateUserSuccessful;

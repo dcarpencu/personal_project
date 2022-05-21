@@ -3,7 +3,7 @@ import 'package:movie_app/src/models/app_course.dart';
 import 'package:movie_app/src/models/available.dart';
 import 'package:movie_app/src/widgets/date_picker.dart';
 import 'package:movie_app/src/widgets/text_field.dart';
-import 'package:movie_app/src/widgets/vaccinated_check_box.dart';
+import 'package:movie_app/src/widgets/available_check_box.dart';
 
 class AddAvailable extends StatefulWidget {
   const AddAvailable({Key? key, required this.course, required this.callback})
@@ -33,7 +33,7 @@ class _AddAvailableState extends State<AddAvailable> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-        title: const Text('Vaccination'),
+        title: const Text('Tutor and Date'),
         content: SingleChildScrollView(
           child: Form(
             key: _formKey,
@@ -41,11 +41,11 @@ class _AddAvailableState extends State<AddAvailable> {
             child: Column(
               children: <Widget>[
                 UserTextField(
-                  name: 'available',
+                  name: 'tutor',
                   initialValue: '',
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
-                      return 'Enter the Vaccination Name';
+                      return "Enter the Tutor's Name";
                     }
                   },
                   inputType: TextInputType.text,
@@ -59,14 +59,14 @@ class _AddAvailableState extends State<AddAvailable> {
                     name: 'Date',
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {
-                        return 'Enter the Vaccination Date';
+                        return 'Enter the Availability Date';
                       }
                     },
                     onChanged: (DateTime text) {
                       availableDate = text;
                     }),
                 AvailableCheckBox(
-                    name: 'Given',
+                    name: 'Available for user',
                     value: done,
                     onChanged: (bool? text) {
                       done = text ?? done;

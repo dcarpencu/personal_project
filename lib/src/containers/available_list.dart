@@ -15,7 +15,7 @@ class AvailableList extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 6),
         const Text(
-          'Vaccinations',
+          'Course sessions',
           style: TextStyle(fontSize: 16),
         ),
         ConstrainedBox(

@@ -8,6 +8,7 @@ part of 'index1.dart';
    const factory LoginTutor.start({
    required String email,
    required String password,
+     String? role,
    required ActionResult onResult,
      @Default(_kLoginTutorPendingId) String pendingId,
    }) = LoginTutorStart;

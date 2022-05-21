@@ -38,7 +38,7 @@ class UserTextField extends StatelessWidget {
       ),
       focusedBorder: OutlineInputBorder(
         borderSide: const BorderSide(
-          width: 2.0,
+          width: 2,
           color: Colors.lightBlue,
         ),
         borderRadius: BorderRadius.circular(10),
@@ -51,7 +51,7 @@ class UserTextField extends StatelessWidget {
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderSide: const BorderSide(
-          width: 2.0,
+          width: 2,
           color: Colors.blue,
         ),
         borderRadius: BorderRadius.circular(10),

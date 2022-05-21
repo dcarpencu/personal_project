@@ -50,7 +50,7 @@ class _HomePageAdminState extends State<HomePageAdmin> {
       builder: (BuildContext context, AppState state) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.purpleAccent,
             title: const Text('Admin courses'),
             leading: IconButton(
               icon: const Icon(Icons.logout),

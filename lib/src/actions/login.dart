@@ -8,6 +8,7 @@ class Login with _$Login implements AppAction {
   const factory Login.start({
     required String email,
     required String password,
+    String? role,
     required ActionResult onResult,
     @Default(_kLoginPendingId) String pendingId,
   }) = LoginStart;

@@ -43,12 +43,14 @@ class AuthApi implements AuthApiBase {
   @override
   Future<AppUser> create({required String email, required String password, required String username}) async {
     final UserCredential credentials = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+    const String role = 'student';
     await _auth.currentUser!.updateDisplayName(username);
 
     final AppUser user = AppUser(
       uid: credentials.user!.uid,
       email: email,
       username: username,
+      role: role,
     );
 
     await _firestore.doc('users/${user.uid}').set(user.toJson());
