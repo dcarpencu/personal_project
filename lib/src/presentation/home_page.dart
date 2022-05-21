@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:movie_app/src/actions/index1.dart';
-import 'package:movie_app/src/containers/course_card.dart';
 import 'package:movie_app/src/containers/course_card_user.dart';
 import 'package:movie_app/src/containers/home_page_container.dart';
 import 'package:movie_app/src/data/courses_database.dart';
@@ -48,6 +47,20 @@ class _HomePageState extends State<HomePage> {
                 StoreProvider.of<AppState>(context).dispatch(const Logout());
               },
             ),
+            actions: <Widget>[
+              Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/signUpTeacher');
+                    },
+                    child: const Icon(
+                      Icons.search,
+                      size: 26,
+                    ),
+                  ),
+              ),
+            ],
           ),
           body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
             stream: repository.getStream(),
@@ -55,6 +68,7 @@ class _HomePageState extends State<HomePage> {
               if (!snapshot.hasData) {
                 return const LinearProgressIndicator();
               }
+              // ignore: always_specify_types
               return _buildList(context, snapshot.data?.docs ?? []);
             },),
         );

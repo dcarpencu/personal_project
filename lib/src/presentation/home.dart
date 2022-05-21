@@ -18,7 +18,7 @@ class Home extends StatelessWidget {
         if (user != null) {
           return const HomePage();
         } else {
-          return const HomePage();
+          return const LoginPage();
         }
       },
     );

@@ -23,7 +23,7 @@ class _SignUpTeacherPageState extends State<SignUpTeacherPage> {
       return;
     }
     StoreProvider.of<AppState>(context).dispatch(
-      CreateTutor(
+      CreateUser(
         email: _email.text,
         password: _password.text,
         username: _username.text,
@@ -42,7 +42,7 @@ class _SignUpTeacherPageState extends State<SignUpTeacherPage> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$error')));
       }
-    } else if (action is CreateTutorSuccessful) {
+    } else if (action is CreateUserSuccessful) {
       Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
     }
     //

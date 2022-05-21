@@ -40,7 +40,10 @@ class _LoginPageState extends State<LoginPage> {
       if (kDebugMode) {
         print(action.error);
       }
-    }
+    } else if (action is LoginSuccessful) {
+  Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+  }
+
   }
 
   @override
@@ -113,6 +116,30 @@ class _LoginPageState extends State<LoginPage> {
                         },
                         child: const Text(
                           'Sign Up',
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/loginTeacher');
+                        },
+                        child: const Text(
+                          'Login Teacher',
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/signUpTeacher');
+                        },
+                        child: const Text(
+                          'Sign Up Teacher',
                           style: TextStyle(
                             color: Colors.black,
                           ),

@@ -23,7 +23,7 @@ class _LoginTeacherPageState extends State<LoginTeacherPage> {
       return;
     }
     StoreProvider.of<AppState>(context).dispatch(
-      LoginTutor.start(email: _email.text, password: _password.text, onResult: _onResult),
+      Login.start(email: _email.text, password: _password.text, onResult: _onResult),
     );
   }
 
@@ -40,6 +40,8 @@ class _LoginTeacherPageState extends State<LoginTeacherPage> {
       if (kDebugMode) {
         print(action.error);
       }
+    } else if (action is LoginSuccessful) {
+      Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
     }
   }
 
@@ -49,7 +51,7 @@ class _LoginTeacherPageState extends State<LoginTeacherPage> {
       body: Form(
         child: PendingContainer(
           builder: (BuildContext context, Set<String> pending) {
-            if (pending.contains(LoginTutor.pendingKey)) {
+            if (pending.contains(Login.pendingKey)) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
