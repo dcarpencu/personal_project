@@ -11,6 +11,7 @@ import 'package:movie_app/src/models/index.dart';
 import 'package:movie_app/src/presentation/home.dart';
 import 'package:movie_app/src/presentation/login_page.dart';
 import 'package:movie_app/src/presentation/login_teacher_page.dart';
+import 'package:movie_app/src/presentation/settings_user_page.dart';
 import 'package:movie_app/src/presentation/sign_up_page.dart';
 import 'package:movie_app/src/presentation/sign_up_teacher_page.dart';
 import 'package:movie_app/src/reducer/reducer.dart';
@@ -54,7 +55,7 @@ class TutoringApp extends StatelessWidget {
           '/login': (BuildContext context) => const LoginPage(),
           '/signUpTeacher': (BuildContext context) => const SignUpTeacherPage(),
           '/loginTeacher': (BuildContext context) => const LoginTeacherPage(),
-          '/userSettings': (BuildContext context) => const LoginTeacherPage(),
+          '/userSettings': (BuildContext context) => const SettingsUser(),
         },
       ),
     );

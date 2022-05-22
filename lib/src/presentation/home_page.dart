@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.only(right: 20),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, '/signUpTeacher');
+                      Navigator.pushNamed(context, '/userSettings');
                     },
                     child: const Icon(
                       Icons.search,
